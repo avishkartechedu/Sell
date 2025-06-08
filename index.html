@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internship Payment Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in-scale {
+      animation: fadeInScale 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-white min-h-screen flex items-center justify-center p-6">
+  <div class="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-10 space-y-8">
+    
+    <!-- Company Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="https://raw.githubusercontent.com/avishkartechedu/Payment-Gateway/refs/heads/main/Screenshot%202025-05-26%20184844.png" alt="Company Logo" class="h-28 object-contain" />
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-center text-gray-800">Internship Payment Gateway</h1>
+
+    <!-- Welcome Message -->
+    <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 text-gray-700 text-sm leading-relaxed space-y-4 shadow-inner">
+      <p><strong>Welcome Student</strong>, the official hub for <strong>Avishkar Tech Solutions'</strong> internship opportunities and e-learning platform...</p>
+      <p><strong>LMS:</strong><br><a href="https://avishkar.academy" class="text-blue-600 hover:underline" target="_blank">https://avishkar.academy</a></p>
+      <p><strong>Visit our site:</strong><br><a href="https://avishkartechsolutions.com/" class="text-blue-600 hover:underline" target="_blank">https://avishkartechsolutions.com/</a></p>
+      <p><strong>LinkedIn:</strong><br><a href="https://www.linkedin.com/in/sunil-gangadhar-78936018a" class="text-blue-600 hover:underline" target="_blank">LinkedIn Profile</a></p>
+    </div>
+
+    <form name="google-sheet" class="space-y-6">
+      <!-- User Details -->
+      <div><label class="block text-lg font-semibold text-gray-700">Name</label><input type="text" name="Name" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" /></div>
+      <div><label class="block text-lg font-semibold text-gray-700">Email</label><input type="email" name="Email" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" /></div>
+      <div><label class="block text-lg font-semibold text-gray-700">Mobile Number</label><input type="text" name="Mobile" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="Enter your mobile number" /></div>
+      <div><label class="block text-lg font-semibold text-gray-700">College/University</label><input type="text" name="College" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="Enter your college/university" /></div>
+      <div><label class="block text-lg font-semibold text-gray-700">Domain of Interest</label><input type="text" name="Domain" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="E.g. Web Development, Data Science" /></div>
+
+      <!-- Plan Selection -->
+      <div>
+        <label class="block text-lg font-semibold text-gray-700 mb-2">Select Your Plan</label>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="Plan" value="Certificate" required class="text-blue-600"> <span>Certificate & Offer Letter</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="Plan" value="Project"> <span>Project</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="Plan" value="ProjectDoc"> <span>Project with Documentation</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="Plan" value="All"> <span>All of the above</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- QR Code Area -->
+      <div id="qrContainer" class="text-center hidden">
+        <label class="block text-lg font-semibold text-gray-700 mb-2">Scan to Pay via UPI</label>
+        <img id="qrImage" src="" alt="UPI Scanner" class="mx-auto w-48 h-48 border border-gray-300 rounded-xl shadow-md">
+      </div>
+
+      <!-- Reference Number -->
+      <div>
+        <label class="block text-lg font-semibold text-gray-700">Reference / Transaction ID</label>
+        <input type="text" name="RefNo" required class="mt-2 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500" placeholder="Enter UPI Reference or Transaction ID" />
+      </div>
+
+      <!-- Agreement -->
+      <div class="flex items-start">
+        <input type="checkbox" name="agree" required class="mt-1.5 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <label class="ml-2 text-sm font-medium text-gray-700">I agree to the terms and conditions</label>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" id="submitBtn" class="bg-blue-600 text-white py-3 px-8 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center justify-center gap-2 mx-auto">
+          <span id="btnText">Submit</span>
+          <svg id="loadingIcon" class="w-5 h-5 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="white" stroke-width="4"></circle>
+            <path class="opacity-75" fill="white" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <input type="hidden" id="submissionDate" name="SubmissionDate">
+    </form>
+
+    <!-- Status Message -->
+    <div id="statusMessage" class="text-center text-lg font-medium text-gray-800 hidden animate-fade-in-scale"></div>
+  </div>
+
+  <script>
+    // Set date
+    document.getElementById('submissionDate').value = new Date().toISOString().split('T')[0];
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwhhFCTP5Wo5_i8KsOapemuRHBwl1GHwtoISR45QAKnDLvzlFXy4jemMtXhL-fsjkCbuA/exec';
+    const thankYouURL = 'https://avishkartechsolutions.com/';
+    const form = document.forms['google-sheet'];
+    const statusMessage = document.getElementById('statusMessage');
+    const qrImage = document.getElementById('qrImage');
+    const qrContainer = document.getElementById('qrContainer');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const loadingIcon = document.getElementById('loadingIcon');
+
+    const qrMap = {
+      Certificate: "https://raw.githubusercontent.com/avishkartechedu/Sell/refs/heads/main/1299.jpg",
+      Project: "https://raw.githubusercontent.com/avishkartechedu/Sell/refs/heads/main/1499.jpg",
+      ProjectDoc: "https://raw.githubusercontent.com/avishkartechedu/Sell/refs/heads/main/1799.jpg",
+      All: "https://raw.githubusercontent.com/avishkartechedu/Sell/refs/heads/main/1999.jpg"
+    };
+
+    // Show QR based on selected plan
+    document.querySelectorAll('input[name="Plan"]').forEach(input => {
+      input.addEventListener('change', e => {
+        const value = e.target.value;
+        if (qrMap[value]) {
+          qrImage.src = qrMap[value];
+          qrContainer.classList.remove('hidden');
+        }
+      });
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      btnText.textContent = "Submitting...";
+      loadingIcon.classList.remove('hidden');
+
+      statusMessage.textContent = "We are submitting your details to our HR team...";
+      statusMessage.classList.remove('hidden');
+
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          setTimeout(() => {
+            statusMessage.textContent = "Your response has been submitted successfully. Redirecting...";
+          }, 3000);
+          setTimeout(() => {
+            window.location.href = thankYouURL;
+          }, 10000);
+        })
+        .catch(error => {
+          statusMessage.textContent = "Something went wrong. Please try again later.";
+          console.error('Error!', error.message);
+        });
+    });
+  </script>
+</body>
+</html>
